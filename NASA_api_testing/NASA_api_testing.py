@@ -16,6 +16,5 @@ try:
     The full documentation for this API can be found in the APOD API Github repository.
     '''
     apiCall.fetchAPOD(apiCall.todayYYYYMMDD, saveImage=True, dir=r"C:\Users\chssm\OneDrive\Desktop\APOD_Images")
-    apiCall.fetchAPOD('2017-06-30', saveImage=True, dir=r"C:\Users\chssm\OneDrive\Desktop\APOD_Images")
 except:
     traceback.print_exc()

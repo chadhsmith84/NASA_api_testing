@@ -1,4 +1,6 @@
-import os, requests, urllib3, pprint, json, traceback, datetime
+import os, requests, urllib3, pprint, json, datetime
+
+import config
 
 class NASA_APIs():
     def downloadPicUrl(self, dir, url, date):
@@ -35,17 +37,15 @@ class NASA_APIs():
         '''
         URL_APOD = "https://api.nasa.gov/planetary/apod"
         params = {
-            'api_key':self.apiKey,
-            'date':date,
-        }
+                'api_key':config.apiKey,
+                'date':date,
+                }
         response = requests.get(URL_APOD,params=params).json()
+
         pprint.PrettyPrinter().pprint(response)
 
         if saveImage:
             self.downloadPicUrl(dir, response['hdurl'], date)
         
-    def __init__(self):
-        # NASA unq api key
-        self.apiKey = '0aa2HF50BeZ76DJGoklPqf0t7HqfK1ZsF4rgu0uC'
-        
+    def __init__(self):        
         self.todayYYYYMMDD = datetime.datetime.now().strftime("%Y-%m-%d")
