@@ -11,8 +11,8 @@
 - from command line
 	-c:\python312\python.exe "PathToPythonFile\NASA_api_testing.py" --date YYYY/MM/DD
 		- The --date paramater is optional. If not todays date will be used
-			-- applicaiton will error if date is not between 06/19/1995 and Today
-				-- images were not stored prior to this date
+			- applicaiton will error if date is not between 06/19/1995 and Today
+				- images were not stored prior to this date
 		- This will call the fetchAPOD function to download the APOD (Astronomy Picture of the Day) to PathToPythonFile\NASA_api_testing.py in a subdirectory "APOD_Images"
 		- https://apod.nasa.gov/apod/astropix.html
 		
