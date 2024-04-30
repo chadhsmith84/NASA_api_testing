@@ -1,10 +1,19 @@
-import os, requests, urllib3, pprint, json, datetime
-
+import os, requests, urllib3, json, datetime
+# import pprint
 import config
+from log import Logger
 
 class NASA_APIs():
+    def try_parsing_date(self, text):
+        for fmt in ('%Y%m%d', '%Y-%m-%d','%Y/%m/%d', '%m%d%Y', '%m/%d/%Y', '%m-%d-%Y'):
+            try:
+                return datetime.datetime.strptime(text, fmt).date().strftime('%Y-%m-%d')
+            except ValueError:
+                pass
+        raise ValueError('no valid date format found')
+        
     def downloadPicUrl(self, dir, url, date):
-        print('attempting to download image from url: {}'.format(url))
+        self.log.info('attempting to download image from url: {}'.format(url))
         response = requests.get(url)
 
         # check response for url call
@@ -17,13 +26,14 @@ class NASA_APIs():
                 os.makedirs(dir)
                 
             # writing out image
-            with open(os.path.join(dir, 'APOD_{}_{}'.format(date, url.split("/")[-1])), 'wb') as outputImage:
+            downloadPath = os.path.join(dir, 'APOD_{}_{}'.format(date, url.split("/")[-1]))                
+            with open(downloadPath, 'wb') as outputImage:
                 outputImage.write(response.content)
 
-            print('image downloaded')
+            self.log.info('image downloaded to {}'.format(downloadPath))
                 
         else:
-            print('failed to download image: {}. Status code: {}'.format(url, response.status_code))
+            self.log.info('failed to download image: {}. Status code: {}'.format(url, response.status_code))
     
     def fetchAPOD(self, date, saveImage, dir):
         '''
@@ -35,17 +45,28 @@ class NASA_APIs():
         thumbs 	        bool 	    False 	    Return the URL of video thumbnail. If an APOD is not a video, this parameter is ignored.
         api_key 	    string 	    DEMO_KEY 	api.nasa.gov key for expanded usage
         '''
+
+        self.log.info('Running APOD (Astronomy Pricture of the Day) for date: {}'.format(date))
+        
         URL_APOD = "https://api.nasa.gov/planetary/apod"
         params = {
                 'api_key':config.apiKey,
                 'date':date,
                 }
-        response = requests.get(URL_APOD,params=params).json()
+        try:         
+            response = requests.get(URL_APOD,params=params)#.json()
+            response.raise_for_status()
+            
+        except requests.RequestException as e:
+            self.log.critical(response.text)
+            raise ValueError(e)
 
-        pprint.PrettyPrinter().pprint(response)
+        # pprint.PrettyPrinter().pprint(response)
 
         if saveImage:
             self.downloadPicUrl(dir, response['hdurl'], date)
         
     def __init__(self):        
         self.todayYYYYMMDD = datetime.datetime.now().strftime("%Y-%m-%d")
+
+        self.log = Logger(os.path.join(os.getcwd(), 'log', datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + '.log'))

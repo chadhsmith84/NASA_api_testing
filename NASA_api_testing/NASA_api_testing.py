@@ -1,10 +1,20 @@
-import traceback
+import traceback, os, getopt, sys
 
 from APIs import NASA_APIs
 
 try:
-    apiCall = NASA_APIs()
-    
+    opts, args = getopt.getopt(sys.argv[1:], '', ['date='])
+    optsDict = {}
+    optsDict.update(dict(opts))
+
+    apiCall = NASA_APIs() 
+
+    if '--date' in optsDict:
+        _tempDate = optsDict['--date']
+        date = apiCall.try_parsing_date(_tempDate)
+    else:
+        date = apiCall.todayYYYYMMDD 
+        
     '''
     APOD
     
@@ -14,7 +24,15 @@ try:
     hashtags for twitter or instagram feeds; but generally help with discoverability of relevant imagery.
 
     The full documentation for this API can be found in the APOD API Github repository.
-    '''
-    apiCall.fetchAPOD(apiCall.todayYYYYMMDD, saveImage=True, dir=r"C:\Users\chssm\OneDrive\Desktop\APOD_Images")
+    ''' 
+                     
+    apiCall.fetchAPOD(date, saveImage=True, dir=os.path.join(os.getcwd(), 'APOD_Images'))
+
+    apiCall.log.info('Process Complete')
+
+    apiCall.log.closeLogger()
 except:
-    traceback.print_exc()
+    apiCall.log.critical(traceback.print_exc())
+    apiCall.log.closeLogger()    
+    
+    
