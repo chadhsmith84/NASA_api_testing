@@ -9,7 +9,7 @@
 		
 # Execution
 - from command line
-	-c:\python312\python.exe "PathToPythonFile\NASA_api_testing.py" --date YYYY/MM/DD
+	- c:\python312\python.exe "PathToPythonFile\NASA_api_testing.py" --date YYYY/MM/DD
 		- The --date paramater is optional. If not todays date will be used
 			- applicaiton will error if date is not between 06/19/1995 and Today
 				- images were not stored prior to this date
