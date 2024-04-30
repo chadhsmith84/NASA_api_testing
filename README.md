@@ -4,10 +4,13 @@
 - config with unq api key from NASA is excluded from repository
 	- navigate to https://api.nasa.gov/
 	- fill out the form to generate unq api key free of charge
-	- create config.py file in code directory
-		- add to file: apiKey = 'myUnqKeyFromNASA'
-		
-# Execution
+	- update line 50 in APIs.py to your unique api key or add as an environment variable
+		-         params = {
+				'api_key':'myUnqKeyFromNASA',
+				'date':date,
+				}
+
+# Showing ability to work with API calls from NASA and parse JSON
 - from command line
 	- c:\python312\python.exe "PathToPythonFile\NASA_api_testing.py" --date YYYY/MM/DD
 		- The --date paramater is optional. If not todays date will be used
@@ -15,8 +18,4 @@
 				- images were not stored prior to this date
 		- This will call the fetchAPOD function to download the APOD (Astronomy Picture of the Day) to PathToPythonFile\NASA_api_testing.py in a subdirectory "APOD_Images"
 		- https://apod.nasa.gov/apod/astropix.html
-		
-
-
-# Showing ability to work with API calls from NASA
-# Showing ability to parse JSON
+		- returned JSON data is parsed and logged/displayed

@@ -18,9 +18,6 @@ class NASA_APIs():
 
         # check response for url call
         if response.status_code == 200:
-            # getting path for directory
-            directory = os.path.dirname(dir)
-            
             # creating directory if it doesn't exist
             if not os.path.exists(dir):
                 os.makedirs(dir)
@@ -50,21 +47,30 @@ class NASA_APIs():
         
         URL_APOD = "https://api.nasa.gov/planetary/apod"
         params = {
-                'api_key':config.apiKey,
+                'api_key':os.environ['API_SECRET_KEY'],
                 'date':date,
                 }
         try:         
-            response = requests.get(URL_APOD,params=params)#.json()
+            response = requests.get(URL_APOD,params=params)
             response.raise_for_status()
             
         except requests.RequestException as e:
             self.log.critical(response.text)
             raise ValueError(e)
 
+        # parse json to dictionary
+        responseDict = json.loads(response.text)
+
+
+        # logging returned data
+        self.log.info('Information about the image')
+        for key, value in responseDict.items():        
+            self.log.info('{}: {}'.format(key, value.strip()))
+
         # pprint.PrettyPrinter().pprint(response)
 
         if saveImage:
-            self.downloadPicUrl(dir, response['hdurl'], date)
+            self.downloadPicUrl(dir, responseDict['hdurl'], date)
         
     def __init__(self):        
         self.todayYYYYMMDD = datetime.datetime.now().strftime("%Y-%m-%d")
