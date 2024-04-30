@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /NASA_api_testing/config.py
+/NASA_api_testing/APOD_Images
