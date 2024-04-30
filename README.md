@@ -4,7 +4,7 @@
 - config with unq api key from NASA is excluded from repository
 	- navigate to https://api.nasa.gov/
 	- fill out the form to generate unq api key free of charge
-	- update line 50 in APIs.py to your unique api key or add as an environment variable
+	- update line 56 in APIs.py to your unique api key or add as an environment variable
 		-         params = {
 				'api_key':'myUnqKeyFromNASA',
 				'date':date,

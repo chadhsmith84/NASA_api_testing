@@ -26,7 +26,7 @@ try:
     The full documentation for this API can be found in the APOD API Github repository.
     ''' 
                      
-    apiCall.fetchAPOD(date, saveImage=True, dir=os.path.join(os.getcwd(), 'APOD_Images'))
+    apiCall.fetchAPOD(date, saveImage=True, dir=os.path.join(apiCall.codePath, 'APOD_Images'))
 
     apiCall.log.info('Process Complete')
 

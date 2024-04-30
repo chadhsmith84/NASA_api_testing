@@ -1,4 +1,5 @@
 import os, requests, urllib3, json, datetime
+from unittest import defaultTestLoader
 # import pprint
 import config
 from log import Logger
@@ -11,6 +12,9 @@ class NASA_APIs():
             except ValueError:
                 pass
         raise ValueError('no valid date format found')
+
+    def openImage(self, img):
+        os.startfile(img)        
         
     def downloadPicUrl(self, dir, url, date):
         self.log.info('attempting to download image from url: {}'.format(url))
@@ -28,6 +32,8 @@ class NASA_APIs():
                 outputImage.write(response.content)
 
             self.log.info('image downloaded to {}'.format(downloadPath))
+
+            return downloadPath
                 
         else:
             self.log.info('failed to download image: {}. Status code: {}'.format(url, response.status_code))
@@ -70,9 +76,14 @@ class NASA_APIs():
         # pprint.PrettyPrinter().pprint(response)
 
         if saveImage:
-            self.downloadPicUrl(dir, responseDict['hdurl'], date)
+            downloadedImage = self.downloadPicUrl(dir, responseDict['hdurl'], date)
+
+        # open file with default application
+        self.openImage(downloadedImage)            
         
     def __init__(self):        
         self.todayYYYYMMDD = datetime.datetime.now().strftime("%Y-%m-%d")
 
-        self.log = Logger(os.path.join(os.getcwd(), 'log', datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + '.log'))
+        self.codePath = os.path.dirname(os.path.realpath(__file__))
+
+        self.log = Logger(os.path.join(self.codePath, 'log', datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + '.log'))
