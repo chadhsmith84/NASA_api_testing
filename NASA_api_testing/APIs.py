@@ -109,10 +109,10 @@ class NASA_APIs():
                     for key, value in items.items():
                         self.log.info('{}: {}'.format(key, value.strip()))
                     if items['media_type'].lower() == 'image' and kwargs['saveImage']:
-                        downloadedImage = self.downloadPicUrl(kwargs['dir'], value['hdurl'], kwargs['date'])
+                        downloadedImage = self.downloadPicUrl(kwargs['dir'], items['hdurl'], kwargs['date'])
 
-                        # open file with default application
-                        self.openImage(downloadedImage)
+                        # # open file with default application
+                        # self.openImage(downloadedImage)
                     else:
                         self.log.info('Media Type: {} and saveImage value: {} (videos will not be download)'.format(items['media_type'], kwargs['saveImage']))
                         self.openUrl(items['url'])
