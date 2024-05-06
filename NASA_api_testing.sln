@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "NASA_api_testing", "NASA_api_testing\NASA_api_testing.pyproj", "{5C1F3442-5AB1-48BE-96E2-582D55574FE6}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "NASA_api_testing", "NASA_api_testing\NASA_api_testing.pyproj", "{7D360BCC-1B02-4CBB-83E7-55ED578E8C33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +11,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5C1F3442-5AB1-48BE-96E2-582D55574FE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C1F3442-5AB1-48BE-96E2-582D55574FE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D360BCC-1B02-4CBB-83E7-55ED578E8C33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D360BCC-1B02-4CBB-83E7-55ED578E8C33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {CBBB6484-C829-4C1A-BAEB-8639DBD5A0B5}
+		SolutionGuid = {9982E9B5-6AAF-4D0D-81B8-685CEA574013}
 	EndGlobalSection
 EndGlobal
