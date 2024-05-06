@@ -120,14 +120,14 @@ class NASA_APIs():
                 for key, value in responseDict.items():
                     self.log.info('{}: {}'.format(key, value.strip()))
 
-                    if responseDict['media_type'].lower() == 'image' and kwargs['saveImage']:
-                        downloadedImage = self.downloadPicUrl(kwargs['dir'], responseDict['hdurl'], kwargs['date'])
+                if responseDict['media_type'].lower() == 'image' and kwargs['saveImage']:
+                    downloadedImage = self.downloadPicUrl(kwargs['dir'], responseDict['hdurl'], kwargs['date'])
 
-                        # open file with default application
-                        self.openImage(downloadedImage)
-                    else:
-                        self.log.info('Media Type: {} and saveImage value: {} (videos will not be download)'.format(responseDict['media_type'], kwargs['saveImage']))
-                        self.openUrl(responseDict['url'])
+                    # open file with default application
+                    self.openImage(downloadedImage)
+                else:
+                    self.log.info('Media Type: {} and saveImage value: {} (videos will not be download)'.format(responseDict['media_type'], kwargs['saveImage']))
+                    self.openUrl(responseDict['url'])
         except BaseException as e:
             raise ValueError(e)
         

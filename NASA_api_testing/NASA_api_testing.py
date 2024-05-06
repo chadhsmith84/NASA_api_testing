@@ -44,7 +44,7 @@ try:
     ''' 
     try:
         if _project.lower() == 'apod':
-            apiCall.fetchAPOD(date=date, startDate=startDate, endDate=endDate, saveImage=False, dir=os.path.join(apiCall.codePath, 'APOD_Images'))
+            apiCall.fetchAPOD(date=date, startDate=startDate, endDate=endDate, saveImage=True, dir=os.path.join(apiCall.codePath, 'APOD_Images'))
     
 
         apiCall.log.info('Process Complete')
